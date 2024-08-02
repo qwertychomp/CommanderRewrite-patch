@@ -17,7 +17,6 @@
     "@nebula-services/dynamic": "^0.7.2-patch.2",
     "@titaniumnetwork-dev/ultraviolet": "^3.2.6",
     "@tomphttp/bare-server-node": "2.0.3",
-    "@types/connect": "^3.4.38",
     "@types/express": "^4.17.21",
     "@types/serve-static": "^1.15.7",
     "astro": "^4.12.2",
