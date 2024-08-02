@@ -1,0 +1,163 @@
+---
+import 'tailwindcss/tailwind.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+import storage from '../../lib/localStorage.ts';
+
+const proxy = storage.get('proxy');
+---
+
+<style type="text/css">
+    #apps div {
+        transition: 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+    #apps div:hover {
+        transform: scale(+1.021) translateY(-2%);
+        filter: brightness(86%);
+    }
+
+    #reddit {
+        background-image: url(/app-icons/reddit.jpg);
+        border-radius: 20px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 400px;
+        height: 100px;
+    }
+
+    #replit {
+        background-image: url(/app-icons/replit.webp);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 200px;
+        height: 150px;
+    }
+
+    #w3schools {
+        background-image: url(/app-icons/w3schools.png);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 400px;
+        height: 150px;
+    }
+
+    #github {
+        background-image: url(/app-icons/github.jpg);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 125px;
+        height: 125px;
+    }
+
+    #invidious {
+        background-image: url(/app-icons/invidious.png);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 400px;
+        height: 150px;
+    }
+
+    #vscode {
+        background-image: url(/app-icons/vscode.png);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 400px;
+        height: 150px;
+    }
+
+    #discord {
+        background-image: url(/app-icons/discord.png);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 300px;
+        height: 125px;
+    }
+
+    #youtube {
+        background-image: url(/app-icons/youtube.jpg);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 300px;
+        height: 125px;
+    }
+
+    #koyeb {
+        background-image: url(/app-icons/koyeb.png);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 300px;
+        height: 125px;
+    }
+
+    #poe {
+        background-image: url(/app-icons/poe.png);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 125px;
+        height: 125px;
+    }
+
+    #figma {
+        background-image: url(/app-icons/figma.webp);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 300px;
+        height: 125px;
+    }
+
+    #vercel {
+        background-image: url(/app-icons/vercel.webp);
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -50% 50%;
+        width: 175px;
+        height: 175px;
+    }
+</style>
+
+<body 
+    class="bg-[#2f2f2f] w-full min-h-screen flex flex-col justify-center items-center gap-[28px]"
+>
+    <div
+        class="w-full h-[65%] flex flex-row justify-center items-center gap-[20px] flex-wrap overflow-y-visible"
+        id="apps"
+    >
+        <div id="reddit" title="Reddit (forum)"></div>
+        <div id="replit" title="Replit (interactive coding hub / sandbox)"></div>
+        <div id="w3schools" title="W3Schools (interactive coding hub)"></div>
+        <div id="github" title="GitHub (software development solution)"></div>
+        <div id="invidious" title="Invidious (faster YouTube frontend)"></div>
+        <div id="vscode" title="Visual Studio Code (good for developers)"></div>
+        <div id="discord" title="Discord (messaging)"></div>
+        <div id="youtube" title="YouTube (social media)"></div>
+        <div id="koyeb" title="Koyeb (hosting service)"></div>
+        <div id="poe" title="Poe (Chatbot library / AI sandbox)"></div>
+        <div id="figma" title="Figma (design platform)"></div>
+        <div id="vercel" title="Vercel (hosting service)"></div>
+    </div>
+</body>

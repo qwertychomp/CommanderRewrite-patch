@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM"]
+  },
+  "extends": "astro/tsconfigs/base"
+}
