@@ -9,7 +9,7 @@ import serveStatic from 'serve-static';
 import express from 'express';
 import { build } from 'astro';
 
-if (!existsSync('dist')) build();
+if (!existsSync('dist')) build({});
 
 const PORT = 3000;
 
