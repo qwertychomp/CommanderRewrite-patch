@@ -61,9 +61,6 @@ const theme = storage.get('theme') || 'default';
                         if (proxy === 'rammerhead') {
                             // @ts-ignore
                             location.href = origin + await rammerheadSearch(input.value);
-                        } else if (proxy === 'dynamic') {
-                            // @ts-ignore
-                            location.href = origin + await sw.encodeDynamic(input.value);
                         } else if (proxy === 'ultraviolet') {
                             // @ts-ignore
                             location.href = origin + await sw.encodeUltraviolet(input.value);
@@ -75,13 +72,6 @@ const theme = storage.get('theme') || 'default';
                         if (proxy === 'rammerhead') {
                             location.href = origin + 
                                 rammerheadSearch(
-                                    'https://www.google.com/search?q=%s'
-                                    // @ts-ignore
-                                    .replace('%s', input.value)
-                                );
-                        } else if (proxy === 'dynamic') {
-                            location.href = origin +
-                                sw.encodeDynamic(
                                     'https://www.google.com/search?q=%s'
                                     // @ts-ignore
                                     .replace('%s', input.value)
@@ -113,9 +103,6 @@ const theme = storage.get('theme') || 'default';
                         if (proxy === 'rammerhead') {
                             // @ts-ignore
                             location.href = origin + await rammerheadSearch(input.value);
-                        } else if (proxy === 'dynamic') {
-                            // @ts-ignore
-                            location.href = origin + await sw.encodeDynamic(input.value);
                         } else if (proxy === 'ultraviolet') {
                             // @ts-ignore
                             location.href = origin + await sw.encodeUltraviolet(input.value);
@@ -127,13 +114,6 @@ const theme = storage.get('theme') || 'default';
                     if (proxy === 'rammerhead') {
                         location.href = origin + 
                             rammerheadSearch(
-                                'https://www.google.com/search?q=%s'
-                                // @ts-ignore
-                                .replace('%s', input.value)
-                            );
-                    } else if (proxy === 'dynamic') {
-                        location.href = origin +
-                            sw.encodeDynamic(
                                 'https://www.google.com/search?q=%s'
                                 // @ts-ignore
                                 .replace('%s', input.value)
@@ -168,8 +148,6 @@ const theme = storage.get('theme') || 'default';
                     storage.set('proxy', 'ultraviolet');
                 } else if (selectedDiv.querySelector('div').classList.toString().includes('rammerhead')) {
                     storage.set('proxy', 'rammerhead');
-                } else if (selectedDiv.querySelector('div').classList.toString().includes('dynamic')) {
-                    storage.set('proxy', 'dynamic');
                 }
             });
         });
@@ -190,9 +168,6 @@ const theme = storage.get('theme') || 'default';
         } else if (storage.get('proxy') === 'ultraviolet') {
             // @ts-ignore
             document.querySelector('div[class^="bg-[url(\'/img/ultraviolet.png\')]"]').click();
-        } else if (storage.get('proxy') === 'dynamic') {
-            // @ts-ignore
-            document.querySelector('div[class^="bg-[url(\'/img/dynamic.png\')]"]').click();
         } else {
             // @ts-ignore
             document.querySelector('div[class^="bg-[url(\'/img/ultraviolet.png\')]"]').click();
@@ -201,12 +176,12 @@ const theme = storage.get('theme') || 'default';
 </script>
 
 <script is:inline src="/baremux/index.js" defer></script>
+<script is:inline src="/epoxy/index.js" defer></script>
+<script is:inline src="/libcurl/index.js" defer></script>
 <script is:inline src="/ultraviolet/uv.bundle.js" defer></script>
 <script is:inline src="/ultraviolet/uv.config.js" defer></script>
 <script is:inline src="/scramjet/scramjet.codecs.js" defer></script>
 <script is:inline src="/scramjet/scramjet.config.js" defer></script>
-<script is:inline src="/dynamic/dynamic.config.js" defer></script>
-<script is:inline src="/dynamic/dynamic.worker.js" defer></script>
 
 <script is:inline src="/sw.js" defer></script>
 
@@ -325,15 +300,6 @@ const theme = storage.get('theme') || 'default';
                 id="selectable"
             >
                 <div class="bg-[url('/img/rammerhead.png')] bg-contain bg-no-repeat w-[70px] h-[70px]"></div>
-            </div>
-
-            <div
-                class="w-[auto] h-[auto] flex justify-center items-center flex-row gap-[2px]"
-                id="selectable"
-            >
-                <div 
-                    class="bg-[url('/img/dynamic.png')] bg-contain bg-no-repeat w-[70.7692307692px] h-[73.2307692308px]"
-                ></div>
             </div>
 
             <div
