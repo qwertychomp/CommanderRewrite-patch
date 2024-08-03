@@ -1,11 +1,15 @@
 import { createServer } from 'node:http';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { existsSync } from 'node:fs';
 import createRammerhead from 'rammerhead/src/server/index.js';
 import { createBareServer } from '@tomphttp/bare-server-node';
 import { server as wisp } from '@mercuryworkshop/wisp-js/server';
 import serveStatic from 'serve-static';
 import express from 'express';
+import { build } from 'astro';
+
+if (!existsSync('dist')) build();
 
 const PORT = 3000;
 
