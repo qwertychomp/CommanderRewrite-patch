@@ -21,7 +21,7 @@ self.addEventListener('fetch', event => {
         (async () => {
             if (dynamic.route(event)) {
                 return await dynamic.fetch(event);
-            } else if (uv.route(event)) {
+            } else if (event.request.url.startsWith(origin + __uv$config.prefix)) {
                 return await uv.fetch(event);
             } else if (scramjet.route(event)) {
                 return await scramjet.fetch(event);

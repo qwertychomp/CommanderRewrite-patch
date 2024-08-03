@@ -33,18 +33,6 @@ const theme = storage.get('theme') || 'default';
     }
 </style>
 
-<script is:inline src="/baremux/index.js" defer></script>
-<script is:inline src="/epoxy/index.js"></script>
-<script is:inline src="/libcurl/index.js"></script>
-<script is:inline src="/ultraviolet/uv.bundle.js"></script>
-<script is:inline src="/ultraviolet/uv.config.js"></script>
-<script is:inline src="/scramjet/scramjet.codecs.js"></script>
-<script is:inline src="/scramjet/scramjet.config.js"></script>
-<script is:inline src="/dynamic/dynamic.config.js"></script>
-<script is:inline src="/dynamic/dynamic.worker.js"></script>
-
-<script is:inline src="/sw.js"></script>
-
 <script>
     import setupBareMux from '../lib/bareMuxSetup';
     import storage from '../lib/localStorage';
@@ -211,6 +199,16 @@ const theme = storage.get('theme') || 'default';
         }
     };
 </script>
+
+<script is:inline src="/baremux/index.js" defer></script>
+<script is:inline src="/ultraviolet/uv.bundle.js" defer></script>
+<script is:inline src="/ultraviolet/uv.config.js" defer></script>
+<script is:inline src="/scramjet/scramjet.codecs.js" defer></script>
+<script is:inline src="/scramjet/scramjet.config.js" defer></script>
+<script is:inline src="/dynamic/dynamic.config.js" defer></script>
+<script is:inline src="/dynamic/dynamic.worker.js" defer></script>
+
+<script is:inline src="/sw.js" defer></script>
 
 <body
     class={

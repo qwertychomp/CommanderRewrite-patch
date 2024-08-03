@@ -7,6 +7,7 @@ import { epoxyPath } from '@mercuryworkshop/epoxy-transport';
 import { baremuxPath } from '@mercuryworkshop/bare-mux/node';
 import { dynamicPath } from '@nebula-services/dynamic';
 import { scramjetPath } from '@mercuryworkshop/scramjet';
+import { uvPath as ultravioletPath } from '@titaniumnetwork-dev/ultraviolet';
 
 export default defineConfig({
   output: 'static',
@@ -17,6 +18,12 @@ export default defineConfig({
       plugins: [
         viteStaticCopy({
             targets: [
+                {
+                    src: ultravioletPath,
+                    dest: '',
+                    rename: 'ultraviolet',
+                    overwrite: false
+                },
                 {
                     src: dynamicPath,
                     dest: '',
@@ -54,6 +61,10 @@ export default defineConfig({
                 {
                   src: 'public/scramjet/scramjet.config.js',
                   dest: 'scramjet'
+                },
+                {
+                    src: 'public/ultraviolet/uv.config.js',
+                    dest: 'ultraviolet'
                 }
             ]
         }),
