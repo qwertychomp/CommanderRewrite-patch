@@ -18,13 +18,14 @@ const proxy = storage.get('proxy');
         transform: scale(+1.021) translateY(-2%);
         filter: brightness(86%);
     }
-
-    #reddit {
-        background-image: url(/app-icons/reddit.jpg);
-        border-radius: 20px;
+    .app {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: -50% 50%;
+    }
+    #reddit {
+        background-image: url(/app-icons/reddit.jpg);
+        border-radius: 20px;
         width: 400px;
         height: 100px;
     }
@@ -32,9 +33,6 @@ const proxy = storage.get('proxy');
     #replit {
         background-image: url(/app-icons/replit.webp);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 200px;
         height: 150px;
     }
@@ -42,9 +40,6 @@ const proxy = storage.get('proxy');
     #w3schools {
         background-image: url(/app-icons/w3schools.png);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 400px;
         height: 150px;
     }
@@ -52,9 +47,6 @@ const proxy = storage.get('proxy');
     #github {
         background-image: url(/app-icons/github.jpg);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 125px;
         height: 125px;
     }
@@ -62,9 +54,6 @@ const proxy = storage.get('proxy');
     #invidious {
         background-image: url(/app-icons/invidious.png);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 400px;
         height: 150px;
     }
@@ -72,9 +61,6 @@ const proxy = storage.get('proxy');
     #vscode {
         background-image: url(/app-icons/vscode.png);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 400px;
         height: 150px;
     }
@@ -82,9 +68,6 @@ const proxy = storage.get('proxy');
     #discord {
         background-image: url(/app-icons/discord.png);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 300px;
         height: 125px;
     }
@@ -92,9 +75,6 @@ const proxy = storage.get('proxy');
     #youtube {
         background-image: url(/app-icons/youtube.jpg);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 300px;
         height: 125px;
     }
@@ -102,9 +82,6 @@ const proxy = storage.get('proxy');
     #koyeb {
         background-image: url(/app-icons/koyeb.png);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 300px;
         height: 125px;
     }
@@ -112,19 +89,13 @@ const proxy = storage.get('proxy');
     #poe {
         background-image: url(/app-icons/poe.png);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 125px;
         height: 125px;
     }
 
     #figma {
         background-image: url(/app-icons/figma.webp);
-        border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
+        border-radius: 10px;;
         width: 300px;
         height: 125px;
     }
@@ -132,9 +103,6 @@ const proxy = storage.get('proxy');
     #vercel {
         background-image: url(/app-icons/vercel.webp);
         border-radius: 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: -50% 50%;
         width: 175px;
         height: 175px;
     }
@@ -147,17 +115,17 @@ const proxy = storage.get('proxy');
         class="w-full h-[65%] flex flex-row justify-center items-center gap-[20px] flex-wrap overflow-y-visible"
         id="apps"
     >
-        <div id="reddit" title="Reddit (forum)"></div>
-        <div id="replit" title="Replit (interactive coding hub / sandbox)"></div>
-        <div id="w3schools" title="W3Schools (interactive coding hub)"></div>
-        <div id="github" title="GitHub (software development solution)"></div>
-        <div id="invidious" title="Invidious (faster YouTube frontend)"></div>
-        <div id="vscode" title="Visual Studio Code (good for developers)"></div>
-        <div id="discord" title="Discord (messaging)"></div>
-        <div id="youtube" title="YouTube (social media)"></div>
-        <div id="koyeb" title="Koyeb (hosting service)"></div>
-        <div id="poe" title="Poe (Chatbot library / AI sandbox)"></div>
-        <div id="figma" title="Figma (design platform)"></div>
-        <div id="vercel" title="Vercel (hosting service)"></div>
+        <div id="reddit" title="Reddit (forum)" class="app"></div>
+        <div id="replit" title="Replit (interactive coding hub / sandbox)" class="app"></div>
+        <div id="w3schools" title="W3Schools (interactive coding hub)" class="app"></div>
+        <div id="github" title="GitHub (software development solution)" class="app"></div>
+        <div id="invidious" title="Invidious (faster YouTube frontend)" class="app"></div>
+        <div id="vscode" title="Visual Studio Code (good for developers)" class="app"></div>
+        <div id="discord" title="Discord (messaging)" class="app"></div>
+        <div id="youtube" title="YouTube (social media)" class="app"></div>
+        <div id="koyeb" title="Koyeb (hosting service)" class="app"></div>
+        <div id="poe" title="Poe (Chatbot library / AI sandbox)" class="app"></div>
+        <div id="figma" title="Figma (design platform)" class="app"></div>
+        <div id="vercel" title="Vercel (hosting service)" class="app"></div>
     </div>
 </body>
