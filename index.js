@@ -69,7 +69,7 @@ server.on('request', (req, res) => {
 });
 
 server.on('upgrade', (req, socket, head) => {
-    if (req.url && req.url?.endsWith('/wisp/')) {
+    if (req.url === '/wisp/') {
         wisp.routeRequest(req, socket, head);
     } else if (bare.shouldRoute(req)) {
         bare.routeUpgrade(req, socket, head);

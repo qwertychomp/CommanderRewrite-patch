@@ -1,14 +1,16 @@
 import storage from './localStorage.ts';
 // @ts-ignore
-import { SetTransport } from '@mercuryworkshop/bare-mux';
+import { BareMuxConnection } from '@mercuryworkshop/bare-mux';
 
-export default function setupBareMux() {
+export default async function setupBareMux() {
     const wispUrl = 
         (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.host + '/wisp/';
 
     const transport = storage.get('transport') || 'epoxy';
 
-    SetTransport(
+    const connection = new BareMuxConnection('/baremux/worker.js');
+
+    await connection.setTransport(
         (
             transport === 'epoxy' ?
             '/epoxy/index.mjs' :
@@ -17,4 +19,6 @@ export default function setupBareMux() {
             '/epoxy/index.mjs'
         ), [{ wisp: wispUrl }]
     );
+
+    console.log(`Set transport to "/${transport}/index.mjs"`);
 };

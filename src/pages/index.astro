@@ -33,14 +33,28 @@ const theme = storage.get('theme') || 'default';
     }
 </style>
 
+<script is:inline src="/baremux/index.js" defer></script>
+<script is:inline src="/epoxy/index.js"></script>
+<script is:inline src="/libcurl/index.js"></script>
+<script is:inline src="/ultraviolet/uv.bundle.js"></script>
+<script is:inline src="/ultraviolet/uv.config.js"></script>
+<script is:inline src="/scramjet/scramjet.codecs.js"></script>
+<script is:inline src="/scramjet/scramjet.config.js"></script>
+<script is:inline src="/dynamic/dynamic.config.js"></script>
+<script is:inline src="/dynamic/dynamic.worker.js"></script>
+
+<script is:inline src="/sw.js"></script>
+
 <script>
+    import setupBareMux from '../lib/bareMuxSetup';
     import storage from '../lib/localStorage';
     import rammerheadSearch from '../lib/rammerheadEncode';
     import Proxies from '../lib/swProxyEncode';
     import RegisterSW from '../lib/swRegister';
 
-    window.onload = () => {
-        RegisterSW();
+    window.onload = async () => {
+        await RegisterSW();
+        setupBareMux();
 
         const parent = document.getElementById('selectables-parent');
         const selectableDivs = parent.querySelectorAll('#selectable');
@@ -197,18 +211,6 @@ const theme = storage.get('theme') || 'default';
         }
     };
 </script>
-
-<script is:inline src="/baremux/index.js"></script>
-<script is:inline src="/epoxy/index.js"></script>
-<script is:inline src="/libcurl/index.js"></script>
-<script is:inline src="/ultraviolet/uv.bundle.js"></script>
-<script is:inline src="/ultraviolet/uv.config.js"></script>
-<script is:inline src="/scramjet/scramjet.codecs.js"></script>
-<script is:inline src="/scramjet/scramjet.config.js"></script>
-<script is:inline src="/dynamic/dynamic.config.js"></script>
-<script is:inline src="/dynamic/dynamic.worker.js"></script>
-
-<script is:inline src="/sw.js"></script>
 
 <body
     class={
