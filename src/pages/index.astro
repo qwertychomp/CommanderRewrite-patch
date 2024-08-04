@@ -41,7 +41,7 @@ const theme = storage.get("theme") || "default";
     import RegisterSW from "../lib/swRegister";
 
     window.onload = async () => {
-        await RegisterSW();
+        RegisterSW();
         setupBareMux();
 
         const parent = document.getElementById("selectables-parent");
@@ -175,6 +175,7 @@ const theme = storage.get("theme") || "default";
     };
 </script>
 
+<script is:inline src="/baremux/bare.cjs" defer></script>
 <script is:inline src="/baremux/index.js" defer></script>
 <script is:inline src="/epoxy/index.js" defer></script>
 <script is:inline src="/libcurl/index.js" defer></script>

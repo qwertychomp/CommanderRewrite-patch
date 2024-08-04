@@ -72,14 +72,14 @@ const staticOptions = {
 app.use(serveStatic(path.join(__dirname, "dist")));
 app.use(compression());
 
-app.use("/libcurl", serveStatic(libcurlPath));
-app.use("/epoxy", serveStatic(epoxyPath));
-app.use("/baremux", serveStatic(baremuxPath));
+app.use("/libcurl", serveStatic(libcurlPath, staticOptions));
+app.use("/epoxy", serveStatic(epoxyPath, staticOptions));
+app.use("/baremux", serveStatic(baremuxPath, staticOptions));
 
-app.use("/baremodule", serveStatic(bareModulePath));
+app.use("/baremodule", serveStatic(bareModulePath, staticOptions));
 
-app.use("/scramjet", serveStatic(scramjetPath));
-app.use("/ultraviolet", serveStatic(ultravioletPath));
+app.use("/scramjet", serveStatic(scramjetPath, staticOptions));
+app.use("/ultraviolet", serveStatic(ultravioletPath, staticOptions));
 
 const server = createServer();
 
@@ -90,7 +90,7 @@ server.on("request", (req, res) => {
 });
 
 server.on("upgrade", (req, socket, head) => {
-    if (req.url && req.url.endsWith("/wisp/")) {
+    if (req.url?.startsWith("/wisp/")) {
         wisp.routeRequest(req, socket, head);
     } else if (shouldRouteRammerhead(req)) {
         routeRammerheadUpgrade(req, socket, head);

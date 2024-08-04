@@ -24,7 +24,7 @@ export default class games {
                 );
 
                 if (response.status !== 200) 
-                    throw new Error("the response status code wasn\"t 200");
+                    throw new Error("the response status code wasn't 200");
 
                 const text = await response.json();
 
@@ -55,7 +55,7 @@ export default class games {
                 );
 
                 if (response.status !== 200) 
-                    throw new Error("the response status code wasn\"t 200");
+                    throw new Error("the response status code wasn't 200");
 
                 const text = await response.json();
 
@@ -86,7 +86,7 @@ export default class games {
                 );
 
                 if (response.status !== 200) 
-                    throw new Error("the response status code wasn\"t 200");
+                    throw new Error("the response status code wasn't 200");
 
                 const text = await response.json();
 
@@ -119,7 +119,7 @@ export default class games {
                 );
 
                 if (response.status !== 200)
-                    throw new Error("the response status code wasn\"t 200");
+                    throw new Error("the response status code wasn't 200");
 
                 const text = await response.json();
 
@@ -152,7 +152,7 @@ export default class games {
                 );
 
                 if (response.status !== 200)
-                    throw new Error("the response status code wasn\"t 200");
+                    throw new Error("the response status code wasn't 200");
 
                 const text = await response.json();
 
