@@ -1,17 +1,17 @@
 ---
-import 'tailwindcss/tailwind.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import '@fontsource/montserrat/400.css';
-import '@fontsource/montserrat/600.css';
-import '@fontsource/montserrat/700.css';
-import '@fontsource/nunito/600.css';
+import "tailwindcss/tailwind.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "@fontsource/montserrat/400.css";
+import "@fontsource/montserrat/600.css";
+import "@fontsource/montserrat/700.css";
+import "@fontsource/nunito/600.css";
 
-import cx from 'classix';
-import storage from '../lib/localStorage.ts';
+import cx from "classix";
+import storage from "../lib/localStorage.ts";
 
-const theme = storage.get('theme') || 'default';
+const theme = storage.get("theme") || "default";
 ---
 
 <style type="text/css">
@@ -34,34 +34,34 @@ const theme = storage.get('theme') || 'default';
 </style>
 
 <script>
-    import setupBareMux from '../lib/bareMuxSetup';
-    import storage from '../lib/localStorage';
-    import rammerheadSearch from '../lib/rammerheadEncode';
-    import Proxies from '../lib/swProxyEncode';
-    import RegisterSW from '../lib/swRegister';
+    import setupBareMux from "../lib/bareMuxSetup";
+    import storage from "../lib/localStorage";
+    import rammerheadSearch from "../lib/rammerheadEncode";
+    import Proxies from "../lib/swProxyEncode";
+    import RegisterSW from "../lib/swRegister";
 
     window.onload = async () => {
         await RegisterSW();
         setupBareMux();
 
-        const parent = document.getElementById('selectables-parent');
-        const selectableDivs = parent.querySelectorAll('#selectable');
-        const input = document.getElementById('url-input');
-        const button = document.getElementById('url-go');
+        const parent = document.getElementById("selectables-parent");
+        const selectableDivs = parent.querySelectorAll("#selectable");
+        const input = document.getElementById("url-input");
+        const button = document.getElementById("url-go");
         let selectedDiv = null;
 
         input.oninput = () => {
             const sw = new Proxies();
 
             input.onkeydown = async (e) => {
-                if (e.key === 'Enter') {
-                    const proxy = storage.get('proxy');
+                if (e.key === "Enter") {
+                    const proxy = storage.get("proxy");
                     // @ts-ignore
-                    if (input.value.startsWith('http://') || input.value.startsWith('https://')) {
-                        if (proxy === 'rammerhead') {
+                    if (input.value.startsWith("http://") || input.value.startsWith("https://")) {
+                        if (proxy === "rammerhead") {
                             // @ts-ignore
                             location.href = origin + await rammerheadSearch(input.value);
-                        } else if (proxy === 'ultraviolet') {
+                        } else if (proxy === "ultraviolet") {
                             // @ts-ignore
                             location.href = origin + await sw.encodeUltraviolet(input.value);
                         } else {
@@ -69,26 +69,26 @@ const theme = storage.get('theme') || 'default';
                             location.href = origin + await sw.encodeScramjet(input.value);
                         }
                     } else {
-                        if (proxy === 'rammerhead') {
+                        if (proxy === "rammerhead") {
                             location.href = origin + 
                                 rammerheadSearch(
-                                    'https://www.google.com/search?q=%s'
+                                    "https://www.google.com/search?q=%s"
                                     // @ts-ignore
-                                    .replace('%s', input.value)
+                                    .replace("%s", input.value)
                                 );
-                        } else if (proxy === 'ultraviolet') {
+                        } else if (proxy === "ultraviolet") {
                             location.href = origin +
                                 sw.encodeUltraviolet(
-                                    'https://www.google.com/search?q=%s'
+                                    "https://www.google.com/search?q=%s"
                                     // @ts-ignore
-                                    .replace('%s', input.value)
+                                    .replace("%s", input.value)
                                 );
                         } else {
                             location.href = origin +
                                 sw.encodeScramjet(
-                                    'https://www.google.com/search?q=%s'
+                                    "https://www.google.com/search?q=%s"
                                     // @ts-ignore
-                                    .replace('%s', input.value)
+                                    .replace("%s", input.value)
                                 );
                         }
                     }
@@ -96,14 +96,14 @@ const theme = storage.get('theme') || 'default';
             };
 
             button.onclick = async () => {
-                const proxy = storage.get('proxy');
+                const proxy = storage.get("proxy");
                 
                 // @ts-ignore
-                if (input.value.startsWith('http://') || input.value.startsWith('https://')) {
-                        if (proxy === 'rammerhead') {
+                if (input.value.startsWith("http://") || input.value.startsWith("https://")) {
+                        if (proxy === "rammerhead") {
                             // @ts-ignore
                             location.href = origin + await rammerheadSearch(input.value);
-                        } else if (proxy === 'ultraviolet') {
+                        } else if (proxy === "ultraviolet") {
                             // @ts-ignore
                             location.href = origin + await sw.encodeUltraviolet(input.value);
                         } else {
@@ -111,26 +111,26 @@ const theme = storage.get('theme') || 'default';
                             location.href = origin + await sw.encodeScramjet(input.value);
                         }
                 } else {
-                    if (proxy === 'rammerhead') {
+                    if (proxy === "rammerhead") {
                         location.href = origin + 
                             rammerheadSearch(
-                                'https://www.google.com/search?q=%s'
+                                "https://www.google.com/search?q=%s"
                                 // @ts-ignore
-                                .replace('%s', input.value)
+                                .replace("%s", input.value)
                             );
-                    } else if (proxy === 'ultraviolet') {
+                    } else if (proxy === "ultraviolet") {
                         location.href = origin +
                             sw.encodeUltraviolet(
-                                'https://www.google.com/search?q=%s'
+                                "https://www.google.com/search?q=%s"
                                 // @ts-ignore
-                                .replace('%s', input.value)
+                                .replace("%s", input.value)
                             );
                     } else {
                         location.href = origin +
                             sw.encodeScramjet(
-                                'https://www.google.com/search?q=%s'
+                                "https://www.google.com/search?q=%s"
                                 // @ts-ignore
-                                .replace('%s', input.value)
+                                .replace("%s", input.value)
                             );
                     }
                 }
@@ -138,39 +138,39 @@ const theme = storage.get('theme') || 'default';
         };
 
         selectableDivs.forEach((div) => {
-            div.addEventListener('click', () => {
+            div.addEventListener("click", () => {
                 selectableDivs.forEach((otherDiv) => {
-                    otherDiv.classList.remove('selected');
+                    otherDiv.classList.remove("selected");
                 });
-                div.classList.add('selected');
+                div.classList.add("selected");
                 selectedDiv = div;
-                if (selectedDiv.querySelector('div').classList.toString().includes('ultraviolet')) {
-                    storage.set('proxy', 'ultraviolet');
-                } else if (selectedDiv.querySelector('div').classList.toString().includes('rammerhead')) {
-                    storage.set('proxy', 'rammerhead');
+                if (selectedDiv.querySelector("div").classList.toString().includes("ultraviolet")) {
+                    storage.set("proxy", "ultraviolet");
+                } else if (selectedDiv.querySelector("div").classList.toString().includes("rammerhead")) {
+                    storage.set("proxy", "rammerhead");
                 }
             });
         });
 
-        document.addEventListener('click', (e) => {
+        document.addEventListener("click", (e) => {
             // @ts-ignore
             if (e.target !== parent && !parent.contains(e.target)) {
                 if (selectedDiv) {
-                    selectedDiv.classList.remove('selected');
+                    selectedDiv.classList.remove("selected");
                     selectedDiv = null;
                 }
             }
         });
 
-        if (storage.get('proxy') === 'rammerhead') {
+        if (storage.get("proxy") === "rammerhead") {
             // @ts-ignore
-            document.querySelector('div[class^="bg-[url(\'/img/rammerhead.png\')]"]').click();
-        } else if (storage.get('proxy') === 'ultraviolet') {
+            document.querySelector("div[class^=\"bg-[url(\"/img/rammerhead.png\")]\"]").click();
+        } else if (storage.get("proxy") === "ultraviolet") {
             // @ts-ignore
-            document.querySelector('div[class^="bg-[url(\'/img/ultraviolet.png\')]"]').click();
+            document.querySelector("div[class^=\"bg-[url(\"/img/ultraviolet.png\")]\"]").click();
         } else {
             // @ts-ignore
-            document.querySelector('div[class^="bg-[url(\'/img/ultraviolet.png\')]"]').click();
+            document.querySelector("div[class^=\"bg-[url(\"/img/ultraviolet.png\")]\"]").click();
         }
     };
 </script>
@@ -188,45 +188,45 @@ const theme = storage.get('theme') || 'default';
 <body
     class={
         cx((
-            theme === 'default' ?
-            'bg-[#080d0f]' :
-            theme === 'read-write' ?
-            'bg-[#2A3953]' :
-            theme === 'noctura' || theme === 'molten' ?
-            'bg-black' :
-            theme === 'bypassi' ?
-            'bg-[#222222]' : 
-            'bg-[#2c3d55]'
-        ), 'w-full min-h-screen flex justify-center items-center')
+            theme === "default" ?
+            "bg-[#080d0f]" :
+            theme === "read-write" ?
+            "bg-[#2A3953]" :
+            theme === "noctura" || theme === "molten" ?
+            "bg-black" :
+            theme === "bypassi" ?
+            "bg-[#222222]" : 
+            "bg-[#2c3d55]"
+        ), "w-full min-h-screen flex justify-center items-center")
     }
     style={{
         // Default font weight property value
         fontWeight: 500,
         fontFamily: 
-            theme === 'default' ?
-            'Roboto' :
-            theme === 'kahoot' ? 
-            'Montserrat' :
-            theme === 'blooket' ?
-            'Nunito' : 
-            theme === 'bypassi' ? 
-            'Metropolis Semi Bold' : 
-            'Roboto'
+            theme === "default" ?
+            "Roboto" :
+            theme === "kahoot" ? 
+            "Montserrat" :
+            theme === "blooket" ?
+            "Nunito" : 
+            theme === "bypassi" ? 
+            "Metropolis Semi Bold" : 
+            "Roboto"
     }}
 >
     <div 
         class={
             cx((
-                theme === 'default' ?
-                'bg-[#080d0f]' :
-                theme === 'read-write' ? 
-                'bg-[#506682]' :
-                theme === 'noctura' || theme === 'molten' ?
-                'bg-gray-900' :
-                theme === 'bypassi' ? 
-                'bg-neutral-900' :
-                'bg-[#3e4c5e]'
-            ), 'w-3/5 h-[28rem] flex justify-center items-center border-2 border-white rounded-lg gap-[28px] flex-col')
+                theme === "default" ?
+                "bg-[#080d0f]" :
+                theme === "read-write" ? 
+                "bg-[#506682]" :
+                theme === "noctura" || theme === "molten" ?
+                "bg-gray-900" :
+                theme === "bypassi" ? 
+                "bg-neutral-900" :
+                "bg-[#3e4c5e]"
+            ), "w-3/5 h-[28rem] flex justify-center items-center border-2 border-white rounded-lg gap-[28px] flex-col")
         }
         style="filter:brightness(89%)"
     >
@@ -234,8 +234,8 @@ const theme = storage.get('theme') || 'default';
             class="w-[100%] h-[15%] flex justify-center items-center flex-row gap-[10px]"
             id="nav-div-container"
             style={{
-                color: '#f1f1f1',
-                fontSize: '22px'
+                color: "#f1f1f1",
+                fontSize: "22px"
             }}
         >
             <a 
@@ -284,8 +284,8 @@ const theme = storage.get('theme') || 'default';
         <div
             class="w-[100%] h-[25%] flex justify-center items-center flex-row gap-[10px]"
             style={{
-                color: '#f1f1f1',
-                fontSize: '26px'
+                color: "#f1f1f1",
+                fontSize: "26px"
             }}
         >
             <h2>battle internet suppression right here, right now</h2>
@@ -294,8 +294,8 @@ const theme = storage.get('theme') || 'default';
         <div
             class="w-[100%] h-[15%] flex justify-center items-center text-center flex-row gap-[30px]"
             style={{
-                color: '#f1f1f1',
-                fontSize: '18px'
+                color: "#f1f1f1",
+                fontSize: "18px"
             }}
             id="selectables-parent"
         >
@@ -322,22 +322,22 @@ const theme = storage.get('theme') || 'default';
             <input 
                 type="text"
                 style={{
-                    display: 'block',
-                    paddingLeft: '30px',
-                    borderTopLeftRadius: '35px',
-                    borderBottomLeftRadius: '35px',
-                    borderTopRightRadius: '0px',
-                    borderBottomRightRadius: '0px',
-                    backgroundColor: '#1e2933',
-                    border: '2px solid #f1f1f1',
-                    outline: 'none',
-                    width: '72%',
-                    height: '100%',
-                    color: '#f1f1f1',
-                    fontSize: '18px',
-                    fontWeight: '600',
-                    fontFamily: 'Montserrat',
-                    textTransform: 'lowercase'
+                    display: "block",
+                    paddingLeft: "30px",
+                    borderTopLeftRadius: "35px",
+                    borderBottomLeftRadius: "35px",
+                    borderTopRightRadius: "0px",
+                    borderBottomRightRadius: "0px",
+                    backgroundColor: "#1e2933",
+                    border: "2px solid #f1f1f1",
+                    outline: "none",
+                    width: "72%",
+                    height: "100%",
+                    color: "#f1f1f1",
+                    fontSize: "18px",
+                    fontWeight: "600",
+                    fontFamily: "Montserrat",
+                    textTransform: "lowercase"
                 }}
                 placeholder="search"
                 spellcheck="false"
@@ -347,26 +347,26 @@ const theme = storage.get('theme') || 'default';
             
             <button
                 style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderTopLeftRadius: '0px',
-                    borderBottomLeftRadius: '0px',
-                    borderTopRightRadius: '35px',
-                    borderBottomRightRadius: '35px',
-                    backgroundColor: '#1e2933',
-                    borderTop: '2px solid #f1f1f1',
-                    borderBottom: '2px solid #f1f1f1',
-                    borderRight: '2px solid #f1f1f1',
-                    borderLeft: 'none',
-                    outline: 'none',
-                    color: '#f1f1f1',
-                    fontSize: '18px',
-                    fontWeight: '600',
-                    fontFamily: 'Montserrat',
-                    textTransform: 'lowercase',
-                    width: '21%',
-                    height: '100%'
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderTopLeftRadius: "0px",
+                    borderBottomLeftRadius: "0px",
+                    borderTopRightRadius: "35px",
+                    borderBottomRightRadius: "35px",
+                    backgroundColor: "#1e2933",
+                    borderTop: "2px solid #f1f1f1",
+                    borderBottom: "2px solid #f1f1f1",
+                    borderRight: "2px solid #f1f1f1",
+                    borderLeft: "none",
+                    outline: "none",
+                    color: "#f1f1f1",
+                    fontSize: "18px",
+                    fontWeight: "600",
+                    fontFamily: "Montserrat",
+                    textTransform: "lowercase",
+                    width: "21%",
+                    height: "100%"
                 }}
                 id="url-go"
             >go</button>

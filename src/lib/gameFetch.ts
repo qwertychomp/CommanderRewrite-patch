@@ -24,12 +24,12 @@ export default class games {
                 );
 
                 if (response.status !== 200) 
-                    throw new Error('the response status code wasn\'t 200');
+                    throw new Error("the response status code wasn\"t 200");
 
                 const text = await response.json();
 
                 if (!Array.isArray(text)) {
-                    throw new Error('the json response must be an array');
+                    throw new Error("the json response must be an array");
                 }
 
                 const authors = text.map(item => item.author);
@@ -55,12 +55,12 @@ export default class games {
                 );
 
                 if (response.status !== 200) 
-                    throw new Error('the response status code wasn\'t 200');
+                    throw new Error("the response status code wasn\"t 200");
 
                 const text = await response.json();
 
                 if (!Array.isArray(text)) {
-                    throw new Error('the json response must be an array');
+                    throw new Error("the json response must be an array");
                 }
 
                 const descriptions = text.map(item => item.description);
@@ -86,12 +86,12 @@ export default class games {
                 );
 
                 if (response.status !== 200) 
-                    throw new Error('the response status code wasn\'t 200');
+                    throw new Error("the response status code wasn\"t 200");
 
                 const text = await response.json();
 
                 if (!Array.isArray(text)) {
-                    throw new Error('the json response must be an array');
+                    throw new Error("the json response must be an array");
                 }
 
                 const urls = text.map(item => item.url);
@@ -119,12 +119,12 @@ export default class games {
                 );
 
                 if (response.status !== 200)
-                    throw new Error('the response status code wasn\'t 200');
+                    throw new Error("the response status code wasn\"t 200");
 
                 const text = await response.json();
 
                 if (!Array.isArray(text)) {
-                    throw new Error('the json response must be an array');
+                    throw new Error("the json response must be an array");
                 }
 
                 const icons = text.map(item => item.icon);
@@ -152,12 +152,12 @@ export default class games {
                 );
 
                 if (response.status !== 200)
-                    throw new Error('the response status code wasn\'t 200');
+                    throw new Error("the response status code wasn\"t 200");
 
                 const text = await response.json();
 
                 if (!Array.isArray(text)) {
-                    throw new Error('the json response must be an array');
+                    throw new Error("the json response must be an array");
                 }
 
                 const names = text.map(item => item.name);
@@ -186,10 +186,10 @@ export default class games {
      * returns the method the game fetch function should use
      */
     async method() {
-        const storageValue = await import('../lib/localStorage')
+        const storageValue = await import("../lib/localStorage")
             .then((value) => {
                 return {
-                    propValue: String(value.default.get('game-fetch-method')) ?? 'GET'
+                    propValue: String(value.default.get("game-fetch-method")) ?? "GET"
                 };
             });
 
@@ -200,6 +200,6 @@ export default class games {
      * returns the path to the games.json file
      */
     #dataPath() {
-        return '../pages/games/games.json' as any;
+        return "../pages/games/games.json" as any;
     }
 };
