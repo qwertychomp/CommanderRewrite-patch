@@ -164,13 +164,13 @@ const theme = storage.get("theme") || "default";
 
         if (storage.get("proxy") === "rammerhead") {
             // @ts-ignore
-            document.querySelector("div[class^=\"bg-[url(\"/img/rammerhead.png\")]\"]").click();
+            document.querySelector("div[class^=\"bg-[url('/img/rammerhead.png')]\"]").click();
         } else if (storage.get("proxy") === "ultraviolet") {
             // @ts-ignore
-            document.querySelector("div[class^=\"bg-[url(\"/img/ultraviolet.png\")]\"]").click();
+            document.querySelector("div[class^=\"bg-[url('/img/ultraviolet.png')]\"]").click();
         } else {
             // @ts-ignore
-            document.querySelector("div[class^=\"bg-[url(\"/img/ultraviolet.png\")]\"]").click();
+            document.querySelector("div[class^=\"bg-[url('/img/ultraviolet.png')]\"]").click();
         }
     };
 </script>
