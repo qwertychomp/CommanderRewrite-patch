@@ -1,10 +1,11 @@
 ---
-import 'tailwindcss/tailwind.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import "tailwindcss/tailwind.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
-import storage from '../../lib/localStorage.ts';
+import storage from "../../lib/localStorage.ts";
+import gameFetch from "../../lib/gameFetch.ts";
 
 const proxy = storage.get('proxy');
 var jsonFile = await fetch("https://cdn.jsdelivr.net/gh/Radon-Games/Radon-Games@main/src/games.json");
@@ -19,12 +20,12 @@ var games = await jsonFile.json();
     #searchContainer {
         width: 81%;
         height: 35px;
-        position:absolute;
+        position: absolute;
         left: 11%;
         background-color: #AFA8A8;
         border-radius: 30vh;
         z-index: 99;
-        top:3%;
+        top: 3%;
     }
     #games div {
         transition: 0.4s cubic-bezier(0.86, 0, 0.07, 1);
