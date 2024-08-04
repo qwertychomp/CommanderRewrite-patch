@@ -7,9 +7,25 @@ import '@fontsource/roboto/700.css';
 import storage from '../../lib/localStorage.ts';
 
 const proxy = storage.get('proxy');
+var jsonFile = await fetch("https://cdn.jsdelivr.net/gh/Radon-Games/Radon-Games@main/src/games.json");
+var games = await jsonFile.json();
 ---
 
 <style type="text/css">
+    body {
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    #searchContainer {
+        width: 81%;
+        height: 35px;
+        position:absolute;
+        left: 11%;
+        background-color: #AFA8A8;
+        border-radius: 30vh;
+        z-index: 99;
+        top:3%;
+    }
     #games div {
         transition: 0.4s cubic-bezier(0.86, 0, 0.07, 1);
     }
@@ -20,63 +36,43 @@ const proxy = storage.get('proxy');
     }
     .game {
         width: 200px;
-        height: 150px
+        height: 150px;
         border-radius: 10px;
-        background-size: cover;
+        background-size: contain;
         background-repeat: no-repeat;
-        background-position: -50% 50%;
     }
-    #minecraft {
-        background-image: url(/game-icons/minecraft.jpeg);
+    #searchIcon {
+        font-size: 10vh;
+        z-index: 99;
     }
-    #minigiants {
-        background-image: url(/game-icons/minigiants.jpeg);
+    #search {
+        position: absolute;
+        left: 2%;
+        height: 100%;
+        width: 96%;
+        background-color: #AFA8A8
     }
-    #dinogame {
-        background-image: url(/game-icons/dinogame.jpeg);
-    }
-    #passwordgame {
-        background-image: url(/game-icons/thepasswordgame.jpeg);
-    }
-    #slope {
-        background-image: url(/game-icons/slopegame.jpeg);
-    }
-    #houseofhazards {
-        background-image: url(/game-icons/houseofhazards.jpeg);
-    }
-    #janissarybattles {
-        background-image: url(/game-icons/janissarybattles.jpeg);
-    }
-    #janissarytower {
-        background-image: url(/game-icons/janissarytower.jpeg);
-    }
-    #motox3m {
-        background-image: url(/game-icons/motox3m.jpeg);
-    }
-    #btd5 {
-        background-image: url(/game-icons/btd5.jpeg);
-    }
-    #geodash {
-        background-image: url(/game-icons/geodash.jpeg);
+    #games {
+        position: absolute;
     }
 </style>
+<head>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
 <body 
     class="bg-[#2f2f2f] w-full min-h-screen flex flex-col justify-center items-center gap-[28px]"
 >
+    <ion-icon name="search-sharp" id="searchIcon"></ion-icon>
+    <div id="searchContainer">
+        <input type="text" id="search"></input>
+    </div> 
     <div
         class="w-full h-[65%] flex flex-row justify-center items-center gap-[20px] flex-wrap overflow-y-visible"
         id="games"
     >
-        <div id="minecraft" title="Minecraft" class="game"></div>
-        <div id="minigiants" title="MiniGiants.io" class="game"></div>
-        <div id="dinogame" title="Chrome dinosaur game" class="game"></div>
-        <div id="passwordgame" title="The Password Game" class="game"></div>
-        <div id="slope" title="Slope Game" class="game"></div>
-        <div id="houseofhazards" title="House of Hazards" class="game"></div>
-        <div id="janissarybattles" title="Janissary battles" class="game"></div>
-        <div id="janissarytower" title="YouTube (social media)" class="game"></div>
-        <div id="motox3m" title="Motox3m" class="game"></div>
-        <div id="btd5" title="Bloons tower defense 5" class="game"></div>
-        <div id="geodash" title="Geometry Dash" class="game"></div>
+    {
+        games.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(https://metallic.eu.org/cdn/images/"+data.id+".png);"}></div>)
+    }
     </div>
 </body>
