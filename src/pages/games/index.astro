@@ -37,9 +37,10 @@ var games = await jsonFile.json();
     .game {
         width: 200px;
         height: 150px;
-        border-radius: 10px;
+        border-radius: 25px;
         background-size: contain;
         background-repeat: no-repeat;
+        background-color: #4f575e;
     }
     #searchIcon {
         font-size: 10vh;
@@ -66,13 +67,17 @@ var games = await jsonFile.json();
     <ion-icon name="search-sharp" id="searchIcon"></ion-icon>
     <div id="searchContainer">
         <input type="text" id="search"></input>
-    </div> 
+    </div>
+
+<body 
+    class="bg-[#080d0f] w-full min-h-screen flex flex-col justify-center items-center gap-[28px]"
+>
     <div
         class="w-full h-[65%] flex flex-row justify-center items-center gap-[20px] flex-wrap overflow-y-visible"
         id="games"
     >
-    {
-        games.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(https://metallic.eu.org/cdn/images/"+data.id+".png);"}></div>)
-    }
+      {
+          games.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(https://metallic.eu.org/cdn/images/"+data.id+".png);"}></div>)
+      }
     </div>
 </body>
