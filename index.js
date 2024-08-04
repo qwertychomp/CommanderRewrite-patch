@@ -3,7 +3,7 @@ import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { existsSync } from 'node:fs';
 import createRammerhead from 'rammerhead/src/server/index.js';
-import { server as wisp } from '@mercuryworkshop/wisp-js/server';
+import wisp from 'wisp-server-node';
 import serveStatic from 'serve-static';
 import express from 'express';
 import { build } from 'astro';
@@ -64,14 +64,14 @@ const routeRammerheadUpgrade = (req, socket, head) => {
 app.use(serveStatic(path.join(__dirname, 'dist')));
 app.use(compression());
 
-app.use('/libcurl/', serveStatic(libcurlPath));
-app.use('/epoxy/', serveStatic(epoxyPath));
-app.use('/baremux/', serveStatic(baremuxPath));
+app.use('/libcurl', serveStatic(libcurlPath));
+app.use('/epoxy', serveStatic(epoxyPath));
+app.use('/baremux', serveStatic(baremuxPath));
 
-app.use('/baremodule/', serveStatic(bareModulePath));
+app.use('/baremodule', serveStatic(bareModulePath));
 
-app.use('/scramjet/', serveStatic(scramjetPath));
-app.use('/ultraviolet/', serveStatic(ultravioletPath));
+app.use('/scramjet', serveStatic(scramjetPath));
+app.use('/ultraviolet', serveStatic(ultravioletPath));
 
 const server = createServer();
 
