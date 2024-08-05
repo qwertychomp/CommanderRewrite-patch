@@ -54,8 +54,8 @@ var games = await jsonFile.json();
         text-overflow: ellipsis;
         background-color: rgba(0, 0, 0, 0);
         color: rgba(195, 189, 192, 0);
-        transition-property: background-color, color;
-        transition-duration: 1s, 1s;
+        transition-property: color;
+        transition-duration: 1s;
         z-index: 99;
     }
     .textContainerContainer {
@@ -64,6 +64,7 @@ var games = await jsonFile.json();
         background-color: rgba(0, 0, 0, 0);
         transition-property: background-color;
         transition-duration: 1s;
+        border-radius: 25px;
     }
     .textContainerContainer:hover {
         background-color: rgba(0, 0, 0, 0.5);
@@ -74,7 +75,6 @@ var games = await jsonFile.json();
         height: 100px;
     }
     .gameDesc:hover {
-        background-color: rgba(0, 0, 0, 0.5);
         color: rgba(195, 189, 192, 1);
     }
     .game
@@ -94,42 +94,103 @@ var games = await jsonFile.json();
     }
 </style>
 <head>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> -->
+    <!--  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/rgb-hex@4.1.0/index.js"></script> 
     <script>
-            var games = document.querySelectorAll(".textContainerContainer");
-            function rgba2hex(orig) {
-                //for whatever reason setting the color of something with javascript using rgba just doesnt work
-                //(at least on firefox), so i have to convert it to a hexcode
-                var a, isPercent,
-                rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
-                alpha = (rgb && rgb[4] || "").trim(),
-                hex = rgb ?
-                (rgb[1] | 1 << 8).toString(16).slice(1) +
-                (rgb[2] | 1 << 8).toString(16).slice(1) +
-                (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
+            // TODO: Remove this ignore comment.
 
-                if (alpha !== "") {
-                    a = alpha;
-                } else {
-                    a = 01;
-                }
-                a = ((a * 255) | 1 << 8).toString(16).slice(1)
-                hex = hex + a;
+import { componentIsHTMLElement } from "astro/runtime/server/render/dom.js";
 
-                return hex;
+// eslint-disable-next-line no-mixed-operators
+const toHex = (red, green, blue, alpha) => ((blue | green << 8 | red << 16) | 1 << 24).toString(16).slice(1) + alpha;
+
+function rgbHex(red, green, blue, alpha) {
+	let isPercent = (red + (alpha || '')).toString().includes('%');
+
+	if (typeof red === 'string' && !green) { // Single string parameter.
+		const parsed = parseCssRgbString(red);
+		if (!parsed) {
+			throw new TypeError('Invalid or unsupported color format.');
+		}
+
+		isPercent = false;
+		[red, green, blue, alpha] = parsed;
+	} else if (alpha !== undefined) {
+		alpha = Number.parseFloat(alpha);
+	}
+
+	if (typeof red !== 'number' ||
+		typeof green !== 'number' ||
+		typeof blue !== 'number' ||
+		red > 255 ||
+		green > 255 ||
+		blue > 255
+	) {
+		throw new TypeError('Expected three numbers below 256');
+	}
+
+	if (typeof alpha === 'number') {
+		if (!isPercent && alpha >= 0 && alpha <= 1) {
+			alpha = Math.round(255 * alpha);
+		} else if (isPercent && alpha >= 0 && alpha <= 100) {
+			alpha = Math.round(255 * alpha / 100);
+		} else {
+			throw new TypeError(`Expected alpha value (${alpha}) as a fraction or percentage`);
+		}
+
+		alpha = (alpha | 1 << 8).toString(16).slice(1); // eslint-disable-line no-mixed-operators
+	} else {
+		alpha = '';
+	}
+
+	return toHex(red, green, blue, alpha);
+}
+
+    const parseCssRgbString = input => {
+	    const parts = input.replace(/rgba?\(([^)]+)\)/, '$1').split(/[,\s/]+/).filter(Boolean);
+	    if (parts.length < 3) {
+		    return;
+	    }
+
+	    const parseValue = (value, max) => {
+		value = value.trim();
+
+		    if (value.endsWith('%')) {
+			    return Math.min(Number.parseFloat(value) * max / 100, max);
+		    }
+
+		    return Math.min(Number.parseFloat(value), max);
+	    };
+
+	    const red = parseValue(parts[0], 255);
+	    const green = parseValue(parts[1], 255);
+	    const blue = parseValue(parts[2], 255);
+	    let alpha;
+
+	        if (parts.length === 4) {
+		            alpha = parseValue(parts[3], 1);
+	            }
+
+	            return [red, green, blue, alpha];
+            };
+
+            function rgba2hex(input) {
+                console.log(rgbHex(input))
+                return "#" + rgbHex(input);
             }
+            var games = document.querySelectorAll(".textContainerContainer");
             for(let x = 0;x<games.length;x++){
                 games[x].addEventListener("mouseover", (event) => {
                     console.log("mouse hovering over " + event.currentTarget);
                     console.log("its grandchild is " + event.currentTarget.children[0].children[0])
-                    event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 0.5)");
-                    event.currentTarget.children[0].children[0].style["color"] = rgba2hex("rgba(195, 189, 192, 1)");
+                    //event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 50" + "%)");
+                    event.currentTarget.children[0].children[0].style["color"] = rgba2hex("rgba(195, 189, 192, 100" + "%)");
                 });
                 games[x].addEventListener("mouseout", (event) => {
                     console.log("mouse left" + event.currentTarget)
-                    event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 0)");
-                    event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 0)");
+                    event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 0"+ "%)");
+                    event.currentTarget.children[0].children[0].style["color"] = rgba2hex("rgba(0, 0, 0, 0"+ "%)");
                 });
             }
     </script>

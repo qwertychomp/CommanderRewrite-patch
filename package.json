@@ -30,6 +30,7 @@
     "compression": "^1.7.4",
     "express": "^4.19.2",
     "rammerhead": "https://github.com/NebulaServices/rammerhead/releases/download/rammerhead-1.2.41-nebula.8/rammerhead-1.2.41-nebula.7.tgz",
+    "rgb-hex": "^4.1.0",
     "serve-static": "^1.15.0",
     "sharp": "^0.33.4",
     "svgo": "^3.3.2",
