@@ -97,18 +97,39 @@ var games = await jsonFile.json();
     <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
-            var games = document.getElementsByClassName("textContainerContainer");
+            var games = document.querySelectorAll(".textContainerContainer");
+            function rgba2hex(orig) {
+                //for whatever reason setting the color of something with javascript using rgba just doesnt work
+                //(at least on firefox), so i have to convert it to a hexcode
+                var a, isPercent,
+                rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
+                alpha = (rgb && rgb[4] || "").trim(),
+                hex = rgb ?
+                (rgb[1] | 1 << 8).toString(16).slice(1) +
+                (rgb[2] | 1 << 8).toString(16).slice(1) +
+                (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
+
+                if (alpha !== "") {
+                    a = alpha;
+                } else {
+                    a = 01;
+                }
+                a = ((a * 255) | 1 << 8).toString(16).slice(1)
+                hex = hex + a;
+
+                return hex;
+            }
             for(let x = 0;x<games.length;x++){
                 games[x].addEventListener("mouseover", (event) => {
                     console.log("mouse hovering over " + event.currentTarget);
                     console.log("its grandchild is " + event.currentTarget.children[0].children[0])
-                    event.currentTarget.children[0].children[0].style.backgroundColor = "rgba(0, 0, 0, 0.5);";
-                    event.currentTarget.children[0].children[0].style.color = "rgba(195, 189, 192, 1);"
+                    event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 0.5)");
+                    event.currentTarget.children[0].children[0].style["color"] = rgba2hex("rgba(195, 189, 192, 1)");
                 });
                 games[x].addEventListener("mouseout", (event) => {
                     console.log("mouse left" + event.currentTarget)
-                    event.currentTarget.children[0].children[0].style.backgroundColor = "rgba(0, 0, 0, 0);"
-                    event.currentTarget.children[0].children[0].style.backgroundColor = "rgba(0, 0, 0, 0);"
+                    event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 0)");
+                    event.currentTarget.children[0].children[0].style["backgroundColor"] = rgba2hex("rgba(0, 0, 0, 0)");
                 });
             }
     </script>
