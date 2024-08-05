@@ -6,6 +6,7 @@ import "@fontsource/roboto/700.css";
 
 import storage from "../../lib/localStorage.ts";
 import gameFetch from "../../lib/gameFetch.ts";
+import extraGames from "./extra-games.json";
 
 const proxy = storage.get('proxy');
 var jsonFile = await fetch("https://cdn.jsdelivr.net/gh/Radon-Games/Radon-Games@main/src/games.json");
@@ -98,11 +99,7 @@ var games = await jsonFile.json();
     <!--  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/rgb-hex@4.1.0/index.js"></script> 
     <script>
-            // TODO: Remove this ignore comment.
 
-import { componentIsHTMLElement } from "astro/runtime/server/render/dom.js";
-
-// eslint-disable-next-line no-mixed-operators
 const toHex = (red, green, blue, alpha) => ((blue | green << 8 | red << 16) | 1 << 24).toString(16).slice(1) + alpha;
 
 function rgbHex(red, green, blue, alpha) {
@@ -210,6 +207,15 @@ function rgbHex(red, green, blue, alpha) {
         class="w-full h-[65%] flex flex-row justify-center items-center gap-[20px] flex-wrap overflow-y-visible"
         id="games"
     >
+    {
+        extraGames.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(../games/extraGame-icons/"+data.id+".png);"}>
+          <div class="textContainerContainer">
+              <div class="textContainer">
+                  <p class="gameDesc">{data.description}</p>
+              </div>
+          </div>
+        </div>)
+    }
       {
           games.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(https://metallic.eu.org/cdn/images/"+data.id+".png);"}>
             <div class="textContainerContainer">

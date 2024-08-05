@@ -2,7 +2,7 @@ export default class games {
     /**
      * the games cdn
      */
-    cdn: string;
+    cdn: string = "https://metallic.eu.org"
     
     constructor(
         cdn: string
