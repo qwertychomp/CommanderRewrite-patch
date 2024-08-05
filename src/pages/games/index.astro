@@ -39,10 +39,30 @@ var games = await jsonFile.json();
         width: 200px;
         height: 150px;
         border-radius: 25px;
-        background-size: contain;
+        background-size: 100% 100%;
         background-repeat: no-repeat;
         background-color: #4f575e;
     }
+    .gameDesc {
+        width: 200px;
+        height:150px;
+        text-align: center;
+        position: absolute;
+        border-radius: 25px;
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background-color: rgba(0, 0, 0, 0);
+        color: rgba(195, 189, 192, 0);
+        transition-property: background-color, color;
+        transition-duration: 0.75ms, 0.75ms;
+        z-index: 99;
+    }
+    .gameDesc:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: rgba(195, 189, 192, 1);
+    }
+    .game
     #searchIcon {
         font-size: 10vh;
         z-index: 99;
@@ -78,7 +98,9 @@ var games = await jsonFile.json();
         id="games"
     >
       {
-          games.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(https://metallic.eu.org/cdn/images/"+data.id+".png);"}></div>)
+          games.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(https://metallic.eu.org/cdn/images/"+data.id+".png);"}>
+            <p class="gameDesc">{data.description}</p>
+          </div>)
       }
     </div>
 </body>

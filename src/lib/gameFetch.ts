@@ -139,7 +139,7 @@ export default class games {
     }
 
     /**
-     * fetches or "retrieves" the game icons
+     * fetches or "retrieves" the game names
      */
     #retrieveNames() {
         return (
@@ -155,10 +155,15 @@ export default class games {
                     throw new Error("the response status code wasn't 200");
 
                 const text = await response.json();
+                /**  the error-handling if-statement under this comment is pointless, because .json() will only ever return an array!
+                 * 
+                if the input passed isnt valid json, then it will create a syntaxError, which will halt build process, throw the error, and
+                and prevent this from running
+                i suggest we remove it from all functions in this file!
 
                 if (!Array.isArray(text)) {
                     throw new Error("the json response must be an array");
-                }
+                }*/
 
                 const names = text.map(item => item.name);
 
