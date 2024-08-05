@@ -44,8 +44,8 @@ var games = await jsonFile.json();
         background-color: #4f575e;
     }
     .gameDesc {
-        width: 200px;
-        height:150px;
+        width: 150px;
+        height: 100px;
         text-align: center;
         position: absolute;
         border-radius: 25px;
@@ -55,8 +55,23 @@ var games = await jsonFile.json();
         background-color: rgba(0, 0, 0, 0);
         color: rgba(195, 189, 192, 0);
         transition-property: background-color, color;
-        transition-duration: 0.75ms, 0.75ms;
+        transition-duration: 1s, 1s;
         z-index: 99;
+    }
+    .textContainerContainer {
+        width: 200px;
+        height: 150px;
+        background-color: rgba(0, 0, 0, 0);
+        transition-property: background-color;
+        transition-duration: 1s;
+    }
+    .textContainerContainer:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .textContainer {
+        margin: auto;
+        width: 150px;
+        height: 100px;
     }
     .gameDesc:hover {
         background-color: rgba(0, 0, 0, 0.5);
@@ -81,6 +96,22 @@ var games = await jsonFile.json();
 <head>
     <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+            var games = document.getElementsByClassName("textContainerContainer");
+            for(let x = 0;x<games.length;x++){
+                games[x].addEventListener("mouseover", (event) => {
+                    console.log("mouse hovering over " + event.currentTarget);
+                    console.log("its grandchild is " + event.currentTarget.children[0].children[0])
+                    event.currentTarget.children[0].children[0].style.backgroundColor = "rgba(0, 0, 0, 0.5);";
+                    event.currentTarget.children[0].children[0].style.color = "rgba(195, 189, 192, 1);"
+                });
+                games[x].addEventListener("mouseout", (event) => {
+                    console.log("mouse left" + event.currentTarget)
+                    event.currentTarget.children[0].children[0].style.backgroundColor = "rgba(0, 0, 0, 0);"
+                    event.currentTarget.children[0].children[0].style.backgroundColor = "rgba(0, 0, 0, 0);"
+                });
+            }
+    </script>
 </head>
 <body 
     class="bg-[#2f2f2f] w-full min-h-screen flex flex-col justify-center items-center gap-[28px]"
@@ -99,7 +130,11 @@ var games = await jsonFile.json();
     >
       {
           games.map((data) => <div id={data.id} title={data.title} class="game" style={"background-image: url(https://metallic.eu.org/cdn/images/"+data.id+".png);"}>
-            <p class="gameDesc">{data.description}</p>
+            <div class="textContainerContainer">
+                <div class="textContainer">
+                    <p class="gameDesc">{data.description}</p>
+                </div>
+            </div>
           </div>)
       }
     </div>
